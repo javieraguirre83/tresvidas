@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "down": "third_life_plus:block/reviver_bottom",
+    "up": "third_life_plus:block/reviver_top",
+    "north": "third_life_plus:block/reviver_2",
+    "east": "third_life_plus:block/reviver_2",
+    "south": "third_life_plus:block/reviver_2",
+    "west": "third_life_plus:block/reviver_2",
+    "particle": "third_life_plus:block/reviver_bottom"
+  }
+}

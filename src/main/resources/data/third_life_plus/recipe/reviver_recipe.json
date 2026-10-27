@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "third_life_plus:jagged_dagger",
+    "minecraft:respawn_anchor"
+  ],
+  "result": {
+    "id": "third_life_plus:reviver_0",
+    "count": 1
+  }
+}

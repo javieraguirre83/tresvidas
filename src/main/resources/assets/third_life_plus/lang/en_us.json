@@ -1,0 +1,22 @@
+{
+  "effect.third_life_plus.temporary_life_effect": "Temporary Life",
+  "key.third_life_plus.set_lives_side": "Switch Lives Position",
+  "item.third_life_plus.golden_heart": "Golden Life",
+  "block.third_life_plus.reviver_1": "Reviver",
+  "key.mcreator.set_side_key": "Set Side",
+  "block.third_life_plus.reviver_0": "Reviver",
+  "block.third_life_plus.reviver_3": "Reviver",
+  "block.third_life_plus.reviver_2": "Reviver",
+  "item.third_life_plus.jagged_dagger": "Jagged Dagger",
+  "subtitles.third_life": "temporary life equips",
+  "death.attack.jagged_dagger_damage.player": "%1$s died and lost their life whilst trying to escape %2$s",
+  "subtitles.gold_life": "Golden Life Equips",
+  "death.attack.jagged_dagger_damage.item": "%1$s was life-tapped by %2$s using %3$s",
+  "item_group.third_life_plus.third_life_plus_creative_tab": "3rd Life +",
+  "death.attack.jagged_dagger_damage": "%1$s gave up their life",
+  "key.third_life_plus.toggle_visibility_keybind": "Toggle Lives Visibility",
+  "item.third_life_plus.heart": "Life",
+  "item.third_life_plus.temporary_life": "Temporary Life",
+  "subtitles.temp_life": "Temporary Life Equips",
+  "key.category.third_life_plus.main": "3rd Life +"
+}

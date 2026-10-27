@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "pattern": [
+    "aaa",
+    "aba",
+    "aaa"
+  ],
+  "key": {
+    "a": "minecraft:leather",
+    "b": "minecraft:diamond"
+  },
+  "result": {
+    "id": "third_life_plus:temporary_life",
+    "count": 1
+  }
+}

@@ -1,0 +1,73 @@
+name: Compilar mod
+
+on:
+  push:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  compilar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Instalar Java 25
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '25'
+
+      - name: Descargar el MDK de Forge 26.2 (la versión más reciente)
+        run: |
+          set -e
+          BASE=https://maven.minecraftforge.net/net/minecraftforge/forge
+          VERSIONES=$(curl -sSf "$BASE/maven-metadata.xml" | grep -oE '<version>26\.2-[^<]+' | sed 's/<version>//' | tac)
+          for V in $VERSIONES; do
+            if curl -sSfL -o mdk.zip "$BASE/$V/forge-$V-mdk.zip"; then
+              echo "Usando Forge $V"
+              echo "FORGE=$V" >> "$GITHUB_ENV"
+              break
+            fi
+          done
+          test -f mdk.zip
+          mkdir mdk && unzip -q mdk.zip -d mdk
+          RAIZ=$(dirname "$(find mdk -maxdepth 2 -name gradlew | head -1)")
+          echo "MDK=$RAIZ" >> "$GITHUB_ENV"
+
+      - name: Poner el código del mod dentro del MDK
+        run: |
+          set -e
+          rm -rf "$MDK/src/main/java/com/example"
+          cp -r src/. "$MDK/src/"
+          P="$MDK/gradle.properties"
+          sed -i -E 's/^mod_id=.*/mod_id=tresvidas/' "$P"
+          sed -i -E 's/^mod_name=.*/mod_name=Tres Vidas/' "$P"
+          sed -i -E 's/^mod_license=.*/mod_license=MIT/' "$P"
+          sed -i -E 's/^mod_version=.*/mod_version=1.0.0/' "$P"
+          sed -i -E 's/^mod_group_id=.*/mod_group_id=com.tunombre.tresvidas/' "$P"
+          sed -i -E 's/^mod_authors=.*/mod_authors=javieraguirre83/' "$P"
+          sed -i -E 's/^mod_description=.*/mod_description=Solo tienes 3 vidas. Al perder la tercera quedas eliminado./' "$P"
+          grep -E '^(minecraft_version|forge_version|mod_)' "$P"
+
+      - name: Compilar
+        working-directory: ${{ env.MDK }}
+        run: |
+          chmod +x gradlew
+          ./gradlew build --no-daemon --stacktrace
+
+      - name: Guardar el .jar
+        uses: actions/upload-artifact@v4
+        with:
+          name: tresvidas-forge-26.2
+          path: ${{ env.MDK }}/build/libs/*.jar
+
+      - name: Publicar descarga directa (pestaña Releases)
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release delete ultima --yes --cleanup-tag || true
+          gh release create ultima "$MDK"/build/libs/*.jar \
+            --title "Tres Vidas para Forge 26.2" \
+            --notes "Compilado con Forge $FORGE. Descarga el .jar y ponlo en tu carpeta mods."

@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "pattern": [
+    " a",
+    "a ",
+    "b "
+  ],
+  "key": {
+    "a": "minecraft:iron_ingot",
+    "b": "minecraft:stick"
+  },
+  "result": {
+    "id": "tresvidas:daga_dentada",
+    "count": 1
+  }
+}

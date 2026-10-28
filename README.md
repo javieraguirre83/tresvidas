@@ -75,9 +75,3 @@ Necesitan **trucos activados**. Si tu mundo no los tiene: **Esc → Abrir en LAN
 | `/addlives @p 1` | Suma 1 o 2 vidas |
 | `/takelives @p 1` | Quita 1 o 2 vidas (no funciona si tienes vidas doradas; usa `/setlives`) |
 | `/resetlives @p` | Todo como al inicio: 3 vidas, sin doradas ni temporal. Si estabas eliminado, te regresa al juego |
-
----
-
-## 🛠️ Cómo se compila
-
-GitHub lo compila automáticamente (pestaña **Actions**): descarga Forge 26.2, mete el código de `src/` y publica el `.jar` en **Releases**.

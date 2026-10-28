@@ -33,6 +33,8 @@ echo "MDK en $MDK"
 if [ -d "$REPO/src/main" ]; then
   rm -rf "$MDK/src/main/java/com/example"
   cp -r "$REPO/src/." "$MDK/src/"
+  sed -i -E "s/^version = .*/version = '1.1.3-forge-26.2'/; s/^group = .*/group = 'net.mj.thirdlife'/; s/examplemod/third_life_plus/g" "$MDK/build.gradle"
+  sed -i -E "s/^rootProject.name = .*/rootProject.name = '3rdLifePlus'/" "$MDK/settings.gradle"
   if [ -f "$REPO/mod.properties" ]; then
     while IFS='=' read -r k v; do
       [ -z "$k" ] && continue
@@ -49,7 +51,7 @@ cd "$MDK"
 chmod +x gradlew
 ./gradlew build --no-daemon --console=plain > "$REG/build.txt" 2>&1
 RESULTADO=$?
-grep -E "error:|warning: \[removal\]|FAILED|BUILD" "$REG/build.txt" | head -200 > "$REG/errores.txt"
+grep -E -A3 "error:|FAILED|BUILD|What went wrong" "$REG/build.txt" | head -400 > "$REG/errores.txt"
 
 # Firmas reales de las clases de Minecraft/Forge 26.2 (para escribir el código correcto)
 if [ -f "$REPO/.github/scripts/clases.txt" ]; then
